@@ -1,9 +1,31 @@
 version: '2'
 
 services:
-    
-    logic-test-kiwi:
-        image: grescha/opendlv-logic-test-kiwi-armhf:v0.0.5
+    device-camera-rpicamv2:
+        image: chalmersrevere/opendlv-device-camera-rpicamv2-armhf:v0.0.1
         network_mode: "host"
-        command: "/usr/bin/opendlv-logic-test-kiwi --cid=112 --freq=10 --frame-id=0"
-
+        volumes:
+          - "/dev/shm:/dev/shm"
+        privileged: true
+        ulimits:
+          memlock:
+            soft: 4000000
+            hard: 4000000
+        command: "/usr/bin/opendlv-device-camera-rpicamv2 --cid=111"
+    
+    device-camera-rpicamv2-example:
+        image: grescha/camera1
+        depends_on:
+          - device-camera-rpicamv2
+        restart: always
+        network_mode: "host"
+        working_dir: /opt/
+        volumes:
+          - "/dev/shm:/dev/shm"
+          - .:/opt/
+        privileged: true
+        ulimits:
+          memlock:
+            soft: 4000000
+            hard: 4000000
+        command: "/usr/bin/example --cid=111 --name=cam0 --traincnn=1 --width=1280 --height=960 --bpp=24 --verbose=0"
