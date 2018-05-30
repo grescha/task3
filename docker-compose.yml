@@ -17,7 +17,7 @@ services:
           memlock:
             soft: 4000000
             hard: 4000000
-        command: "/usr/bin/opendlv-device-camera-rpicamv2 --cid=111"
+        command: "/usr/bin/opendlv-device-camera-rpicamv2 --cid=112"
     
     device-camera-rpicamv2-example:
         image: grescha/test-example-armhf-v:0.0.1
@@ -34,4 +34,4 @@ services:
           memlock:
             soft: 4000000
             hard: 4000000
-        command: "/usr/bin/example --cid=111 --name=cam0 --traincnn=1 --width=1280 --height=960 --bpp=24 --verbose=0 --B1=71 --B2=95 --B3=45 --B4=260 --B5=50 --B6=205"
+        command: "/usr/bin/example --cid=112 --name=cam0 --traincnn=1 --width=1280 --height=960 --bpp=24 --verbose=0 --B1=71 --B2=95 --B3=45 --B4=260 --B5=50 --B6=205"
